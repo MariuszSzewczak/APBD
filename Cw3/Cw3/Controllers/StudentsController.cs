@@ -46,26 +46,12 @@ namespace Cw3.Controllers
         [HttpDelete]
         public IActionResult DeleteStudent(int id)
         {
-            if (id == 1)
-            {
-                return Ok("Delete Kowalski");
-            }
-            else if (id == 2)
-            { return Ok("Delete Szewczak"); }
-
-            return NotFound("Nie ma studenta");
+            return Ok("Deleted Completed");
         }
         [HttpPut]
         public IActionResult EditStudent(int id)
         {
-            if (id == 1)
-            {
-                return Ok("Edit Kowalski");
-            }
-            else if (id == 2)
-            { return Ok("Edit Szewczak"); }
-
-            return NotFound("Nie ma studenta");
+            return Ok("Update completed");
         }
     }
 }
