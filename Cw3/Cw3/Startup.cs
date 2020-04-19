@@ -12,6 +12,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Cw3.DAL;
 using Cw3.Services;
+using System.Data.SqlClient;
+using Cw3.Models;
+using Microsoft.AspNetCore.Http;
+using WebApplication2.Middlewares;
 
 namespace Cw3
 {
@@ -38,6 +42,7 @@ namespace Cw3
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseMiddleware<LoggingMiddleware>();
 
             app.UseHttpsRedirection();
 
