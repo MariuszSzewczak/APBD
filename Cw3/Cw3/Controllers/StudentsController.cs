@@ -22,22 +22,23 @@ namespace Cw3.Controllers
             _dbService = service;
         }
         [HttpGet]
-        public IActionResult GetStudents(string id)
+        public IActionResult GetStudents()
         {
             var students = new List<Student>();
             
-            using (var con = new SqlConnection("Data Source=db-mssql;Initial Catalog=s8652;Integrated Security=True"))
+            using (var con = new SqlConnection("Data Source=db-mssql.pjwstk.edu.pl;Initial Catalog=2019SBD;Integrated Security=True"))
             {
                 using (var com = new SqlCommand())
                 {
                     com.Connection = con;
-                    com.CommandText = "Select FirstName, LastName, BirthDate, Name, Semester From Enrollment, Student, Studies Where Enrollment.IdStudy = Studies.IdStudy AND Enrollment.IdEnrollment = Student.IdEnrollment AND Student.IndexNumber = " + id+" ";
+                    com.CommandText = "Select IndexNumber, FirstName, LastName, BirthDate, Name, Semester From Enrollment, Student, Studies Where Enrollment.IdStudy = Studies.IdStudy AND Enrollment.IdEnrollment = Student.IdEnrollment; ";
 
                     con.Open();
                     var dr = com.ExecuteReader();
                     while (dr.Read())
                     {
                         var st = new Student();
+                        st.IndexNumber = dr["IndexNumber"].ToString();
                         st.FirstName = dr["FirstName"].ToString();
                         st.LastName = dr["LastName"].ToString();
                         st.BirthDate = dr["BirthDate"].ToString();
@@ -53,7 +54,7 @@ namespace Cw3.Controllers
         public IActionResult GetStudent(string id)
         {
             var enroll = new Enrollment();
-            using (var con = new SqlConnection("Data Source=db-mssql;Initial Catalog=s8652;Integrated Security=True"))
+            using (var con = new SqlConnection("Data Source=db-mssql.pjwstk.edu.pl;Initial Catalog=2019SBD;Integrated Security=True"))
             {
                 using (var com = new SqlCommand())
                 {
