@@ -11,5 +11,6 @@ namespace Cw3.Services
     {
         public IActionResult EnrollStudent(EnrollStudentRequest enrollStudentRequest);
         public IActionResult PromoteStudents(PromotionStudentRequest promotionStudentRequest);
+		public Boolean CheckCredential(string user, string password);
     }
 }

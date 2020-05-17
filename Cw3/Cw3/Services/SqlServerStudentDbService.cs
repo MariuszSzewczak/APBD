@@ -118,5 +118,29 @@ namespace Cw3.Services
             }
             return Ok();
         }
+		 
+		 public bool CheckCredential(string user, string pass)
+        {
+            using (var connection = new SqlConnection("Data Source=db-mssql;Initial Catalog=2019SBD;Integrated Security=True"))
+            using (var command = new SqlCommand())
+            {
+                command.Connection = connection;
+                connection.Open();
+                try
+                {
+                    command.CommandText = "Select 1 from student where IndexNumber = @user and pass = @pass; ";
+                    command.Parameters.AddWithValue("user", user);
+                    command.Parameters.AddWithValue("pass", pass);
+                    return command.ExecuteReader().Read();
+
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return false;
+                }
+            }
+
+        }
     }
 }
